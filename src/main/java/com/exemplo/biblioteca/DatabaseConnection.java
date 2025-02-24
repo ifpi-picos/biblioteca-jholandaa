@@ -61,13 +61,14 @@ public class DatabaseConnection {
                                  "nome VARCHAR(255) NOT NULL" +
                                  ");";
         
-            String sqlEmprestimos = "CREATE TABLE IF NOT EXISTS emprestimos (" +
-                                    "id SERIAL PRIMARY KEY, " +
-                                    "usuario_id INT REFERENCES usuarios(id), " +
-                                    "livro_id INT REFERENCES livros(id), " +
-                                    "data_emprestimo TIMESTAMP DEFAULT CURRENT_TIMESTAMP, " +
-                                    "data_devolucao TIMESTAMP NULL" +
-                                    ");";
+             String sqlEmprestimos = "CREATE TABLE IF NOT EXISTS emprestimos (" +
+                                "id SERIAL PRIMARY KEY, " +
+                                 "usuario_id INT REFERENCES usuarios(id), " +
+                                 "livro_id INT REFERENCES livros(id), " +
+                                 "data_emprestimo TIMESTAMP DEFAULT CURRENT_TIMESTAMP, " +
+                                 "data_devolucao TIMESTAMP NULL" +
+                                 ");";
+         
         
             String alterarLivros = "ALTER TABLE livros ADD COLUMN IF NOT EXISTS disponivel BOOLEAN DEFAULT TRUE;";
         
