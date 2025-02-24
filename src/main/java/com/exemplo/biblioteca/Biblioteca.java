@@ -1,3 +1,4 @@
+package com.exemplo.biblioteca;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +9,16 @@ public class Biblioteca {
     public Biblioteca() {
         this.livros = new ArrayList<>();
         this.usuarios = new ArrayList<>();
-    }
+        }
+    
+        private Usuario buscarUsuarioPorId(int id) {
+            for (Usuario usuario : usuarios) {
+                if (usuario.getId() == id) {
+                    return usuario;
+                }
+            }
+            return null;
+        }
 
     public void cadastrarLivro(Livro livro) {
         livros.add(livro);
@@ -29,9 +39,9 @@ public class Biblioteca {
         System.out.println("Usuário cadastrado: " + usuario.getNome());
     }
 
-    public void emprestarLivro(int idUsuario, String identificadorLivro) {
+    public void emprestarLivro(int idUsuario, int idLivro) {
         Usuario usuario = buscarUsuarioPorId(idUsuario);
-        Livro livro = buscarLivroPorIdentificador(identificadorLivro);
+        Livro livro = buscarLivroPorId(idLivro);
 
         if (usuario != null && livro != null && livro.isDisponivel()) {
             usuario.adicionarLivroEmprestado(livro);
@@ -42,43 +52,13 @@ public class Biblioteca {
         }
     }
 
-    public void devolverLivro(int idUsuario, String identificadorLivro) {
-        Usuario usuario = buscarUsuarioPorId(idUsuario);
-        Livro livro = buscarLivroPorIdentificador(identificadorLivro);
-
-        if (usuario != null && livro != null && usuario.getLivrosEmprestados().contains(livro)) {
-            usuario.removerLivroEmprestado(livro);
-            livro.setDisponivel(true);
-            System.out.println("Livro devolvido: " + livro.getTitulo() + " pelo usuário: " + usuario.getNome());
-        } else {
-            System.out.println("Usuário ou livro não encontrado.");
-        }
-    }
-
-    private Usuario buscarUsuarioPorId(int id) {
-        for (Usuario usuario : usuarios) {
-            if (usuario.getId() == id) {
-                return usuario;
-            }
-        }
-        return null;
-    }
-
-    private Livro buscarLivroPorIdentificador(String identificador) {
+    private Livro buscarLivroPorId(int id) {
         for (Livro livro : livros) {
-            if (livro.getIdentificador().equals(identificador)) {
+            if (livro.getId() == id) {  
                 return livro;
             }
         }
         return null;
     }
-
-    
-    public List<Livro> getLivros() {
-        return livros;
-    }
-
-    public List<Usuario> getUsuarios() {
-        return usuarios;
-    }
 }
+

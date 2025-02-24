@@ -1,0 +1,10 @@
+-------------------------------------------------------------------------------
+Test set: com.exemplo.biblioteca.LivroDAOTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.083 s <<< FAILURE! - in com.exemplo.biblioteca.LivroDAOTest
+testInserirLivro  Time elapsed: 0.072 s  <<< ERROR!
+java.lang.ExceptionInInitializerError
+	at com.exemplo.biblioteca.LivroDAOTest.testInserirLivro(LivroDAOTest.java:7)
+Caused by: java.lang.RuntimeException: ❌ Arquivo database.properties não encontrado!
+	at com.exemplo.biblioteca.LivroDAOTest.testInserirLivro(LivroDAOTest.java:7)
+

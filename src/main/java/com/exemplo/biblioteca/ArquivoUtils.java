@@ -1,3 +1,4 @@
+package com.exemplo.biblioteca;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
@@ -12,25 +13,22 @@ import java.io.File;
 
 public class ArquivoUtils {
     
-    // Salvar como TXT
     public static void salvarComoTXT(String nomeArquivo, List<Livro> livros, List<Usuario> usuarios) {
         try (FileWriter writer = new FileWriter(nomeArquivo + ".txt")) {
             writer.write("=== Livros ===\n");
             for (Livro livro : livros) {
-                writer.write("Título: " + livro.getTitulo() + " | Autor: " + livro.getAutor() + " | ID: " + livro.getIdentificador() + "\n");
+                writer.write("Título: " + livro.getTitulo() + " | Autor: " + livro.getAutor() + " | ID: " + livro.getId() + "\n");
             }
             writer.write("\n=== Usuários ===\n");
             for (Usuario usuario : usuarios) {
                 writer.write("Nome: " + usuario.getNome() + " | ID: " + usuario.getId() + "\n");
             }
-            writer.close();
-            System.out.println("✅ Arquivo salvo como " + nomeArquivo + ".txt");
+            System.out.println("Arquivo salvo como " + nomeArquivo + ".txt");
         } catch (IOException e) {
-            System.err.println("❌ Erro ao salvar TXT: " + e.getMessage());
+            System.err.println("erro ao salvar TXT: " + e.getMessage());
         }
     }
 
-    // Salvar como XML
     public static void salvarComoXML(String nomeArquivo, List<Livro> livros, List<Usuario> usuarios) {
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -54,7 +52,7 @@ public class ArquivoUtils {
                 livroElement.appendChild(autor);
 
                 Element id = document.createElement("ID");
-                id.appendChild(document.createTextNode(livro.getIdentificador()));
+                id.appendChild(document.createTextNode(String.valueOf(livro.getId())));
                 livroElement.appendChild(id);
 
                 livrosElement.appendChild(livroElement);
@@ -83,11 +81,13 @@ public class ArquivoUtils {
             StreamResult result = new StreamResult(new File(nomeArquivo + ".xml"));
 
             transformer.transform(source, result);
-            System.out.println("✅ Arquivo salvo como " + nomeArquivo + ".xml");
+            System.out.println("Arquivo salvo como " + nomeArquivo + ".xml");
 
         } catch (Exception e) {
-            System.err.println("❌ Erro ao salvar XML: " + e.getMessage());
+            System.err.println("Erro ao salvar XML: " + e.getMessage());
         }
     }
 }
+
+
 
